@@ -1,5 +1,5 @@
 #include "ui/ui.h"
-
+#include "ui/breakpoint.h"
 #include "nemu.h"
 
 #include <signal.h>
@@ -65,6 +65,7 @@ static void cmd_r() {
 		char c;
 		while(1) {
 			printf("The program is already running. Restart the program? (y or n)");
+		    fflush(stdout);
 			scanf("%c", &c);
 			switch(c) {
 				case 'y': goto restart_;
@@ -91,6 +92,46 @@ void main_loop() {
 		if(strcmp(p, "c") == 0) { cmd_c(); }
 		else if(strcmp(p, "r") == 0) { cmd_r(); }
 		else if(strcmp(p, "q") == 0) { return; }
+		else if(strcmp(p, "si") ==0) {
+				if(nemu_state == END) restart();
+				nemu_state = RUNNING;
+				char *q=strtok(NULL," ");
+				int t;
+				if (q == NULL) t=1;
+				else t=atoi(q);
+				cpu_exec(t);
+				if(nemu_state!=END)
+				nemu_state=STOP;
+				}
+		else if(strcmp(p,"info")==0){
+		char *q=strtok(NULL," ");
+		if(strcmp(q,"r")==0){
+		printf("eax\t0x%08x\t%d\n",cpu.eax,cpu.eax);
+		printf("ecx\t0x%08x\t%d\n",cpu.ecx,cpu.ecx);
+		printf("edx\t0x%08x\t%d\n",cpu.edx,cpu.edx);
+		printf("ebx\t0x%08x\t%d\n",cpu.ebx,cpu.ebx);
+		printf("esp\t0x%08x\t0x%08x\n",cpu.esp,cpu.esp);
+		printf("edp\t0x%08x0x\t%08x\n",cpu.ebp,cpu.ebp);
+		printf("esi\t0x%08x\t%d\n",cpu.esi,cpu.esi);
+		printf("edi\t0x%08x\t%d\n",cpu.edi,cpu.edi);
+		printf("eip\t0x%08x\t0x%08x\n",cpu.eip,cpu.eip);
+		}
+		}    
+		
+		else if(strcmp(p,"x") == 0){
+			char *q=strtok(NULL," ");
+			int bite=atoi(q);
+			int address;
+			sscanf(p,"%x",&address);
+			int i=0;
+			while(i<bite){
+				printf("0x%8x:\t",address+i*4);
+				int material=swaddr_read(address+i*4,4);
+				printf("0x%8x\n",material);
+				i++;
+			}
+		}
+		
 
 		/* TODO: Add more commands */
 
