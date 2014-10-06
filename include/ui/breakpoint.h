@@ -7,6 +7,8 @@
 
 typedef struct breakpoint {
 	int NO;
+	unsigned address;
+	unsigned short material;
 	struct breakpoint *next;
 
 	/* TODO: Add more members if necessary */
@@ -14,4 +16,6 @@ typedef struct breakpoint {
 
 } BP;
 
+void set_bp(char *p);
+BP* new_bp();
 #endif

@@ -106,14 +106,14 @@ void main_loop() {
 		else if(strcmp(p,"info")==0){
 		char *q=strtok(NULL," ");
 		if(strcmp(q,"r")==0){
-		printf("eax\t0x%08x\t%d\n",cpu.eax,cpu.eax);
-		printf("ecx\t0x%08x\t%d\n",cpu.ecx,cpu.ecx);
-		printf("edx\t0x%08x\t%d\n",cpu.edx,cpu.edx);
-		printf("ebx\t0x%08x\t%d\n",cpu.ebx,cpu.ebx);
+		printf("eax\t0x%08x\t%10d\n",cpu.eax,cpu.eax);
+		printf("ecx\t0x%08x\t%10d\n",cpu.ecx,cpu.ecx);
+		printf("edx\t0x%08x\t%10d\n",cpu.edx,cpu.edx);
+		printf("ebx\t0x%08x\t%10d\n",cpu.ebx,cpu.ebx);
 		printf("esp\t0x%08x\t0x%08x\n",cpu.esp,cpu.esp);
-		printf("edp\t0x%08x0x\t%08x\n",cpu.ebp,cpu.ebp);
-		printf("esi\t0x%08x\t%d\n",cpu.esi,cpu.esi);
-		printf("edi\t0x%08x\t%d\n",cpu.edi,cpu.edi);
+		printf("edp\t0x%08x\t0x%08x\n",cpu.ebp,cpu.ebp);
+		printf("esi\t0x%08x\t%10d\n",cpu.esi,cpu.esi);
+		printf("edi\t0x%08x\t%10d\n",cpu.edi,cpu.edi);
 		printf("eip\t0x%08x\t0x%08x\n",cpu.eip,cpu.eip);
 		}
 		}    
@@ -131,7 +131,17 @@ void main_loop() {
 				i++;
 			}
 		}
-		
+		else if(strcmp(p,"b")==0){
+			char *q=strtok(NULL," ");
+			if((*q) == '*' && (*(q+1)) == '0' && (*(q+2)) == 'x')
+				set_bp(q);
+				}
+		else if(strcmp(p,"d")==0){
+
+
+		}
+
+	 	
 
 		/* TODO: Add more commands */
 
