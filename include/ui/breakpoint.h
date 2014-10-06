@@ -9,6 +9,8 @@ typedef struct breakpoint {
 	int NO;
 	unsigned address;
 	unsigned short material;
+	bool enb;
+	bool used;
 	struct breakpoint *next;
 
 	/* TODO: Add more members if necessary */

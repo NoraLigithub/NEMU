@@ -121,8 +121,9 @@ void main_loop() {
 		else if(strcmp(p,"x") == 0){
 			char *q=strtok(NULL," ");
 			int bite=atoi(q);
+			q=strtok(NULL," ");
 			int address;
-			sscanf(p,"%x",&address);
+			sscanf(q,"%x",&address);
 			int i=0;
 			while(i<bite){
 				printf("0x%8x:\t",address+i*4);
