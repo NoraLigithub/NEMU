@@ -126,9 +126,9 @@ void main_loop() {
 			sscanf(q,"%x",&address);
 			int i=0;
 			while(i<bite){
-				printf("0x%8x:\t",address+i*4);
+				printf("0x%08x:\t",address+i*4);
 				int material=swaddr_read(address+i*4,4);
-				printf("0x%8x\n",material);
+				printf("0x%08x\n",material);
 				i++;
 			}
 		}
