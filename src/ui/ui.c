@@ -137,7 +137,7 @@ void main_loop() {
 		else if(strcmp(p,"b")==0){
 			char *q=strtok(NULL," ");
 			if((*q) == '*' && (*(q+1)) == '0' && (*(q+2)) == 'x')
-				set_bp(q);
+				set_bp(q+3);
 				}
 		else if(strcmp(p,"d")==0){
 			char* q=strtok(NULL," ");
