@@ -7,6 +7,9 @@
 static BP bp_pool[NR_BP];
 static BP *head, *free_;
 
+BP* ret_head(){
+	return head;
+}
 void init_bp_pool() {
 	int i;
 	for(i = 0; i < NR_BP - 1; i ++) {
@@ -36,5 +39,36 @@ void set_bp(char *p){
 	swaddr_write(add,1,INT3_CODE);
 	printf("Breakpoint %d at 0x%x\n",(new->NO)+1,add);
 }
-
+void print_bp(){
+	BP* temp=head;
+	if (temp == NULL)
+		printf("No breakpoints.\n");
+	else{
+		int i;
+		for(i=0;i<32;i++){
+			temp=head;
+			while((temp!=NULL)&&(temp->NO!=i+1))
+				temp=temp->next;
+			if(temp!=NULL)
+				printf("%d\t%x\n",i,temp->address);
+		}
+	}
+}
+void free_bp(int number){
+	BP* pioneer,*current;
+	current=head;
+	pioneer=current;
+	if(head->NO == number)
+		head=head->next;
+	else {
+		while((current->NO!=number)&&(current->next!=NULL)){
+			pioneer=current;
+			current=current->next;
+		}
+		pioneer->next=current->next;
+		current->next=free_;
+		swaddr_write(current->address,1,current->material);
+		free_=current;
+	}
+}
 /* TODO: Implement the function of breakpoint */

@@ -16,10 +16,11 @@ make_helper(inv) {
 	assert(0);
 }
 
+bool is_Break = false;
 make_helper(int3) {
 	/* A breakpoint is hit! Do something here! */
-	assert(0);
-
+	is_Break=true;
+	printf("A breakpoint is hit!");
 	return 1;
 }
 

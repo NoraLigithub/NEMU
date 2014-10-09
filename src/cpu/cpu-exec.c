@@ -4,7 +4,11 @@
 
 #include <setjmp.h>
 
+#include "ui/breakpoint.h"
+
 #define LOADER_START 0x100000
+
+extern bool is_Break;
 
 int exec(swaddr_t);
 void load_prog();
@@ -43,10 +47,20 @@ void cpu_exec(volatile uint32_t n) {
 	setjmp(jbuf);
 	for(; n > 0; n --) {
 		swaddr_t eip_temp = cpu.eip;
+		BP* current;
+		if(is_Break == true && swaddr_read(cpu.eip-1,1) == INT3_CODE){
+			cpu.eip--;
+			current=ret_head();
+			while(current->address != cpu.eip)
+			   	current = current->next;
+		  	swaddr_write(cpu.eip,1,current->material);
+		}
 		int instr_len = exec(cpu.eip);
-
-		cpu.eip += instr_len;
-
+		if(is_Break == true && swaddr_read(cpu.eip,1) != INT3_CODE){
+		        	swaddr_write(cpu.eip,1,INT3_CODE);
+					is_Break=false;
+			}
+     	cpu.eip += instr_len;
 		if(n_temp != -1 || (enable_debug && !quiet)) {
 			print_bin_instr(eip_temp, instr_len);
 			puts(assembly);
@@ -55,7 +69,8 @@ void cpu_exec(volatile uint32_t n) {
 		if(nemu_state == INT) {
 			printf("\n\nUser interrupt\n");
 			return;
-		} 
+		}
+		else if(is_Break == true) {return;}
 		else if(nemu_state == END) { return; }
     }
 }

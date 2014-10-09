@@ -116,6 +116,8 @@ void main_loop() {
 		printf("edi\t0x%08x\t%10d\n",cpu.edi,cpu.edi);
 		printf("eip\t0x%08x\t0x%08x\n",cpu.eip,cpu.eip);
 		}
+		else if(strcmp(p,"b") == 0)
+			print_bp();
 		}    
 		
 		else if(strcmp(p,"x") == 0){
@@ -138,6 +140,25 @@ void main_loop() {
 				set_bp(q);
 				}
 		else if(strcmp(p,"d")==0){
+			char* q=strtok(NULL," ");
+			if(q==NULL){
+				printf("Delete all breakpoints?(y / n)");
+				char c;
+				scanf("%c",&c);
+				if((c == 'y')||(c == 'Y' )){
+					int i;
+					for( i=0;i<NR_BP;i++)
+						free_bp(i);
+				}
+			}
+			else{
+				int number=atoi(q);
+				if(number>ret_head()->NO)
+					printf("No breakpoint number %d.\n",number);
+				else free_bp(number);
+				free_bp(number);
+			}
+
 
 
 		}
