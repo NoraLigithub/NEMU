@@ -55,20 +55,21 @@ void print_bp(){
 	}
 }
 void free_bp(int number){
-	BP* pioneer,*current;
+	BP* pioneer, * current;
 	current=head;
-	pioneer=current;
-	if(head->NO == number)
-		head=head->next;
-	else {
-		while((current->NO!=number)&&(current->next!=NULL)){
+		while((current->NO!=number)&&(current!=NULL)){
 			pioneer=current;
 			current=current->next;
 		}
-		pioneer->next=current->next;
-		current->next=free_;
-		swaddr_write(current->address,1,current->material);
-		free_=current;
+		if(current->NO==number){
+			if(current==head) head=current->next;
+	        else	
+				pioneer->next=current->next;
+	    	current->next=free_;
+	    	swaddr_write(current->address,1,current->material);
+	    	free_=current;
 	}
+		else
+			printf("No breakpoints!\n");
 }
 /* TODO: Implement the function of breakpoint */
