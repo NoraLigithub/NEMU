@@ -81,6 +81,15 @@ restart_:
 	cmd_c();
 }
 
+int cmd_p(char *p){
+	bool flag=true;
+	int result= expr(p,&flag);
+	if(flag==false){
+		printf("Illegal expression!\n");
+		assert(0);
+	}
+	return result;
+}
 void main_loop() {
 	char *cmd;
 	while(1) {
@@ -125,7 +134,8 @@ void main_loop() {
 			int bite=atoi(q);
 			q=strtok(NULL," ");
 			int address;
-			sscanf(q,"%x",&address);
+			//sscanf(q,"%x",&address);
+			address=cmd_p(q);
 			int i=0;
 			while(i<bite){
 				printf("0x%08x:\t",address+i*4);
@@ -136,9 +146,12 @@ void main_loop() {
 		}
 		else if(strcmp(p,"b")==0){
 			char *q=strtok(NULL," ");
-			if((*q) == '*' && (*(q+1)) == '0' && (*(q+2)) == 'x')
-				set_bp(q+3);
-				}
+			if((*q) == '*' && (*(q+1)) == '0' && (*(q+2)) == 'x'){
+				int address;
+				address=cmd_p(q+3);
+				set_bp(address);
+			}
+		}
 		else if(strcmp(p,"d")==0){
 			char* q=strtok(NULL," ");
 			if(q==NULL){

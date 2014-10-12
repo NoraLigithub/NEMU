@@ -28,7 +28,6 @@ void restart() {
 	memcpy(hwa_to_va(LOADER_START), loader, loader_len);
 
 	cpu.eip = LOADER_START;
-
 	init_dram();
 }
 

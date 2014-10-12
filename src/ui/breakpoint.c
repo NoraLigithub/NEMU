@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "nemu.h"
 
+
 #define NR_BP 32
 
 static BP bp_pool[NR_BP];
@@ -30,9 +31,8 @@ BP* new_bp()
 	head=temp;
 	return head;
 }
-void set_bp(char *p){
-	int add;
-	sscanf(p,"%x",&add);
+void set_bp(int add){
+	//sscanf(p,"%x",&add);
 	BP* new=new_bp();
 	new->address=add;
 	new->material=swaddr_read(add,1);

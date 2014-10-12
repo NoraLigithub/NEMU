@@ -17,7 +17,7 @@ typedef struct breakpoint {
 
 } BP;
 
-void set_bp(char *p);
+void set_bp(int add);
 BP* new_bp();
 void print_bp();
 void free_bp(int number);
