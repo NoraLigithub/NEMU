@@ -148,7 +148,7 @@ void main_loop() {
 			char *q=strtok(NULL," ");
 			if((*q) == '*' && (*(q+1)) == '0' && (*(q+2)) == 'x'){
 				int address;
-				address=cmd_p(q);
+				sscanf(q+3,"%x",&address);
 				set_bp(address);
 			}
 		}
