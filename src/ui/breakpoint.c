@@ -63,7 +63,7 @@ void free_bp(int number){
 			current=current->next;
 		}
 		if(current->NO==number){
-			if(current==head) head=current->next;
+				if(current==head) head=current->next;
 	        else	
 				pioneer->next=current->next;
 	    	current->next=free_;
