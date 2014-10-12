@@ -134,8 +134,8 @@ void main_loop() {
 			int bite=atoi(q);
 			q=strtok(NULL," ");
 			int address;
-			//sscanf(q,"%x",&address);
-			address=cmd_p(q);
+			sscanf(q,"%x",&address);
+			//address=cmd_p(q);
 			int i=0;
 			while(i<bite){
 				printf("0x%08x:\t",address+i*4);
