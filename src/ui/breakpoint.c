@@ -47,10 +47,11 @@ void print_bp(){
 		int i;
 		for(i=0;i<32;i++){
 			temp=head;
-			while((temp!=NULL)&&(temp->NO!=i+1))
+			while((temp!=NULL)&&(temp->NO!=i+1)){
 				temp=temp->next;
 			if(temp!=NULL)
 				printf("%d\t%x\n",i,temp->address);
+			}
 		}
 	}
 }
