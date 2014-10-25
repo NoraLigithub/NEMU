@@ -46,7 +46,6 @@ void cpu_exec(volatile uint32_t n) {
 	volatile uint32_t n_temp = n;
 
 	setjmp(jbuf);
-	printf("%x",cpu.esp);
 	for(; n > 0; n --) {
 		swaddr_t eip_temp = cpu.eip;
 		BP* current;
@@ -58,6 +57,7 @@ void cpu_exec(volatile uint32_t n) {
 		  	swaddr_write(cpu.eip,1,current->material);
 		}
 		int instr_len = exec(cpu.eip);
+		printf("%x",cpu.esp);
 		if(is_Break == true && swaddr_read(cpu.eip,1) != INT3_CODE){
 		        	swaddr_write(cpu.eip,1,INT3_CODE);
 					is_Break=false;
