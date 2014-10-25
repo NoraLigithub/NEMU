@@ -17,6 +17,7 @@ void init_bp_pool() {
 		bp_pool[i].NO = i;
 		bp_pool[i].next = &bp_pool[i + 1];
 	}
+	bp_pool[i].NO=i;
 	bp_pool[i].next = NULL;
 
 	head = NULL;
