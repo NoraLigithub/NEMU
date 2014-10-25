@@ -27,6 +27,8 @@ void restart() {
 	load_prog();
 	memcpy(hwa_to_va(LOADER_START), loader, loader_len);
 
+	cpu.esp=0x8000000;
+	cpu.ebp=0x0;
 	cpu.eip = LOADER_START;
 	init_dram();
 }

@@ -120,7 +120,7 @@ void main_loop() {
 		printf("edx\t0x%08x\t%10d\n",cpu.edx,cpu.edx);
 		printf("ebx\t0x%08x\t%10d\n",cpu.ebx,cpu.ebx);
 		printf("esp\t0x%08x\t0x%08x\n",cpu.esp,cpu.esp);
-		printf("edp\t0x%08x\t0x%08x\n",cpu.ebp,cpu.ebp);
+		printf("ebp\t0x%08x\t0x%08x\n",cpu.ebp,cpu.ebp);
 		printf("esi\t0x%08x\t%10d\n",cpu.esi,cpu.esi);
 		printf("edi\t0x%08x\t%10d\n",cpu.edi,cpu.edi);
 		printf("eip\t0x%08x\t0x%08x\n",cpu.eip,cpu.eip);
