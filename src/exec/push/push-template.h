@@ -4,7 +4,7 @@
 
 make_helper(concat(push_r2r_,SUFFIX)){
 	int reg_code = instr_fetch(eip,1) & 0x7;
-	printf("%x",cpu.esp);
+	printf("%x",DATA_BYTE);
 	cpu.esp=cpu.esp-DATA_BYTE;
 	printf("%x",cpu.esp);
 	MEM_W(REG(R_ESP),REG(reg_code));
