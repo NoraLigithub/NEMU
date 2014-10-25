@@ -15,5 +15,5 @@
 extern char suffix;
 
 make_helper(push_r2r_v){
-	return (suffix == '1' ? push_r2r_l(eip) : push_r2r_w(eip));
+	return (suffix == 'l' ? push_r2r_l(eip) : push_r2r_w(eip));
 }
