@@ -46,6 +46,7 @@ void cpu_exec(volatile uint32_t n) {
 	volatile uint32_t n_temp = n;
 
 	setjmp(jbuf);
+	printf("%x",cpu.esp);
 	for(; n > 0; n --) {
 		swaddr_t eip_temp = cpu.eip;
 		BP* current;
