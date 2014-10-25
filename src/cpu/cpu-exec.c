@@ -56,6 +56,7 @@ void cpu_exec(volatile uint32_t n) {
 			   	current = current->next;
 		  	swaddr_write(cpu.eip,1,current->material);
 		}
+		printf("%x",cpu.esp);
 		int instr_len = exec(cpu.eip);
 		printf("%x",cpu.esp);
 		if(is_Break == true && swaddr_read(cpu.eip,1) != INT3_CODE){
