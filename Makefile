@@ -35,10 +35,10 @@ loader: $(TESTFILE)
 	rm loader
 
 
-run: nemu
+run: nemu $(TESTFILE)
 	./nemu -d $(TESTFILE) 2>&1 | tee log.txt
 
-gdb: nemu
+gdb: nemu $(TESTFILE)
 	gdb --args ./nemu -dq $(TESTFILE)
 
 test: nemu $(TEST_FILE_LIST)

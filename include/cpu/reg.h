@@ -25,7 +25,31 @@ typedef union {
 	struct 
 	{uint32_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
 	        swaddr_t eip;
+	union{
+	uint32_t _32;
+	struct {
+	    uint32_t CF :1;
+		uint32_t a1 :1;
+        uint32_t PF :1;
+		uint32_t a3 :1;
+	    uint32_t AF :1;
+		uint32_t a5 :1;
+		uint32_t ZF :1;
+		uint32_t SF :1;
+		uint32_t TF :1;
+		uint32_t IF :1;
+		uint32_t DF :1;
+		uint32_t OF :1;
+		uint32_t OL :1;
+		uint32_t IP :1;
+		uint32_t NT :1;
+		uint32_t a15 :1;
+		uint32_t RF :1;
+		uint32_t VM :1;
+		uint32_t a18_31 :14;
 	};
+	}EFLAGS;
+};
 } CPU_state;
 
 extern CPU_state cpu;

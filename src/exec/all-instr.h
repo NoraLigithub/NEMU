@@ -4,4 +4,6 @@
 
 #include "push/push.h"
 
+#include "test/test.h"
+
 #include "misc/misc.h"
