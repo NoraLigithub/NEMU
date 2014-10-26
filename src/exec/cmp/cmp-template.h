@@ -4,10 +4,10 @@
 
 make_helper(concat(cmp_8i2r_,SUFFIX)) {
 	ModR_M m;
-	DATA_TYPE imm;
+	DATA_TYPE imm = instr_fetch(eip + 1 + 1,DATA_BYTE);//reg model,not memory
 	m.val = instr_fetch(eip+1,1);
+	print_asm("cmp" str(SUFFOX) " $0x%x,%%%s", imm, REG_NAME(m.R_M) );
 	if(m.mod == 3){
-		imm = instr_fetch(eip + 1 + 1,DATA_BYTE);
 		int temp = REG(m.R_M) - imm;
 		cpu.EFLAGS.SF = (temp >> 31) &0x1;
 		if(((imm >> 31) & 0x1) && ((REG(m.R_M) >> 31) & 0x1) && !cpu.EFLAGS.SF)			cpu.EFLAGS.OF = 1;
